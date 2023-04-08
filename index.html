@@ -4,9 +4,39 @@
 	<title>Hi!</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="refresh" content="3">
+	<style>
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+	</style>
 </head>
 <body>
 	<h1>Hi!003</h1>
 	<p>This page will refresh every 3 seconds.</p>
+	<canvas id="myCanvas"></canvas>
+	<script>
+		var canvas = document.getElementById("myCanvas");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		var ctx = canvas.getContext("2d");
+		var x = 0;
+		var y = 0;
+		canvas.addEventListener("mousemove", function(event) {
+			x = event.clientX;
+			y = event.clientY;
+		});
+		function drawCircle() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.beginPath();
+			ctx.arc(x, y, 50, 0, 2 * Math.PI);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			requestAnimationFrame(drawCircle);
+		}
+		drawCircle();
+	</script>
 </body>
 </html>
